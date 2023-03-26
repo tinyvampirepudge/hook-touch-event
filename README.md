@@ -16,11 +16,25 @@ APPLY_GRADLE_PLUGIN = false
 
 3、发布插件到本地仓库：
 
-```
-# v4
-./gradlew clean touch-event-gradle-plugin:uploadArchives
+通过gradle命令行，执行发布的task即可。也可在AS的Gradle视图中执行对应的Task(推荐)。
 
-# v7
+v4:
+
+```
+执行发布到本地仓库的任务：
+./gradlew touch-event-gradle-plugin:uploadArchives
+# 或
+./gradlew clean touch-event-gradle-plugin:uploadArchives
+```
+
+v7:
+
+```
+# 执行发布到本地仓库的任务：
+./gradlew touch-event-gradle-plugin-v7:publishToLocalRepoPublicationToMavenRepository
+# 或
+./gradlew clean touch-event-gradle-plugin-v7:publishToLocalRepoPublicationToMavenRepository
+```
 ```
 
 4、增加app模块对插件的依赖。
@@ -114,7 +128,7 @@ v4:
 ```
 执行发布到本地仓库的任务：
 ./gradlew touch-event-gradle-plugin:uploadArchives
-
+# 或
 ./gradlew clean touch-event-gradle-plugin:uploadArchives
 ```
 
@@ -123,7 +137,7 @@ v7:
 ```
 # 执行发布到本地仓库的任务：
 ./gradlew touch-event-gradle-plugin-v7:publishToLocalRepoPublicationToMavenRepository
-
+# 或
 ./gradlew clean touch-event-gradle-plugin-v7:publishToLocalRepoPublicationToMavenRepository
 ```
 
@@ -171,10 +185,6 @@ PLUGIN_VERSION_CODE定义在gradle.properties中，主要是为了调试方便�
 PLUGIN_VERSION_CODE=0.0.1
 # touch-event-gradle-plugin end
 ```
-
-### 发布到maven远程仓库
-
-todo 配置
 
 ## Transform场景适配
 
@@ -241,3 +251,8 @@ apply plugin: 'touch.event.gradle.plugin'
 ```
 
 接着sync即可
+
+### 3、app中引入配套的sdk
+```groovy
+api project(':touch-event-sdk')
+```
