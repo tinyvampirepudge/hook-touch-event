@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.test_module">
+
+    <application>
+        <activity
+            android:name=".ImplModuleBaseDispatchWithOverrideActivity"
+            android:label="module-继承自base-复写dispatchTouchEvent"
+            android:exported="false" />
+        <activity
+            android:name=".ImplModuleBaseDispatchWithoutOverrideActivity"
+            android:label="module-继承自base-不复写dispatchTouchEvent"
+            android:exported="false" />
+    </application>
+
+</manifest>

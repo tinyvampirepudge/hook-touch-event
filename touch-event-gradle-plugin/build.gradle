@@ -1,0 +1,59 @@
+apply plugin: 'groovy'
+apply plugin: 'maven'
+
+dependencies {
+    implementation fileTree(dir: 'libs', includes: ['*.jar'])
+
+    implementation gradleApi()
+    implementation localGroovy()
+
+    implementation "com.android.tools.build:gradle:$gradle_tool_version"
+
+    //ASM依赖
+    implementation 'org.ow2.asm:asm:9.1'
+    implementation 'org.ow2.asm:asm-commons:9.1'
+
+    // import org.apache.commons.io.FileUtils
+    implementation group: 'commons-io', name: 'commons-io', version: '2.6'
+}
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+def UV_MAVEN_USERNAME = properties.getProperty('UV_MAVEN_USERNAME')
+def UV_MAVEN_PASSWORD = properties.getProperty('UV_MAVEN_PASSWORD')
+
+// https://github.com/bytedance/ByteX/blob/master/gradle/publish-maven.gradle
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+
+                pom.groupId = "$groupIdStr" // 发布到仓库的构建group
+                pom.artifactId = "$artifactIdStr" // 发布到仓库的构建id
+                pom.version = "$versionStr" // 发布到仓库的构建版本
+                println("uploadArchives111 pom.version:" + pom.version)
+
+//                if (UV_MAVEN_USERNAME != null && UV_MAVEN_PASSWORD != null) {
+//                    def releasesRepoUrl = 'https://nexus.xxx.net/repository/maven-releases'
+//                    def snapshotsRepoUrl = 'https://nexus.xxx.net/repository/maven-snapshots'
+//                    println("uploadArchives222 pom.version:" + pom.version)
+//
+//                    if (pom.version.endsWith('SNAPSHOT')) {
+//                        snapshotRepository(url: snapshotsRepoUrl) {
+//                            authentication(userName: UV_MAVEN_USERNAME, password: UV_MAVEN_PASSWORD)
+//                        }
+//                    } else {
+//                        repository(url: releasesRepoUrl) {
+//                            authentication(userName: UV_MAVEN_USERNAME, password: UV_MAVEN_PASSWORD)
+//                        }
+//                    }
+//                } else {
+                    // 本地的 Maven 地址设置
+                    // 部署到本地，也就是项目的根目录下
+                    // 部署成功会创建一个 local-repo 文件夹，命名自取
+                    repository(url: uri("${rootProject.projectDir}/${LOCAL_REPO_PATH}"))
+//                }
+            }
+        }
+    }
+}

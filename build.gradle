@@ -1,0 +1,58 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    ext.kotlin_version = '1.4.31'
+    ext.gradle_tools_version_v4 = "4.2.0"
+    ext.gradle_tools_version_v7 = "7.2.0"
+    ext.applyGradlePlugin = "${APPLY_GRADLE_PLUGIN}"
+    // 默认是v4.2.0
+    def gradle_version = "$gradle_tools_version_v4"
+    // 优先使用v7
+    if ("true" == "${USE_GRADLE_V7}") gradle_version = "$gradle_tools_version_v7"
+    println("USE_GRADLE_V7:" + "${USE_GRADLE_V7}")
+    println("gradle_version:" + gradle_version)
+    ext.gradle_tool_version = gradle_version
+
+    // plugin-version
+    def plugin_version = "$PLUGIN_VERSION_CODE_V4"
+    if ("true" == "${USE_GRADLE_V7}") plugin_version = "$PLUGIN_VERSION_CODE_V7"
+    println("plugin_version:" + plugin_version)
+    ext.plugin_version = plugin_version
+
+    // plugin config
+    ext.groupIdStr = "${PLUGIN_GROUP_ID}"
+    ext.artifactIdStr = "${PLUGIN_ARTIFACT_ID}"
+    ext.versionStr = "$plugin_version"
+
+    repositories {
+        mavenCentral()
+        google()
+        jcenter()
+        // 如果是发布到MavenLocal就是用mavenLocal()
+//        mavenLocal()
+        // 自定义插件仓库地址
+        maven {
+            url uri("${rootProject.projectDir}/${LOCAL_REPO_PATH}")
+        }
+        // 已经发布到jcenter，不需要自己的仓库了
+//        maven { url "https://nexus.xxx.net/repository/maven-public" }
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:$gradle_tool_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+
+        // 加载自定义插件 groupId + artifactId + version
+        if ("true" == "$applyGradlePlugin") classpath "${PLUGIN_GROUP_ID}:${PLUGIN_ARTIFACT_ID}:$plugin_version"
+    }
+}
+
+allprojects {
+    repositories {
+        mavenCentral()
+        google()
+        jcenter()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

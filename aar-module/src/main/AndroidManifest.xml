@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.aar_module">
+
+    <application>
+        <activity
+            android:name=".ImplAARBaseDispatchWithOverrideActivity"
+            android:label="aar-继承自base-复写dispatchTouchEvent"
+            android:exported="false" />
+        <activity
+            android:name=".ImplAARBaseDispatchWithoutOverrideActivity"
+            android:label="aar-继承自base-不复写dispatchTouchEvent"
+            android:exported="false" />
+    </application>
+
+</manifest>

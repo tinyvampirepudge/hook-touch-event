@@ -1,0 +1,11 @@
+rootProject.name = "hook-touch-event"
+include ':app'
+include ':touch-event-sdk'
+if ("true" == "${USE_GRADLE_V7}") {
+    include ':touch-event-gradle-plugin-v7'
+} else {
+    include ':touch-event-gradle-plugin'
+}
+include ':test-module'
+include ':aar-module'
+include ':jar-module'

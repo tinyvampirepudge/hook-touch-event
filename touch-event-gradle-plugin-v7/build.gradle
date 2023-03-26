@@ -1,0 +1,110 @@
+plugins {
+    // Apply the Java Gradle plugin development plugin to add support for developing Gradle plugins
+    id 'java-gradle-plugin'
+
+    // Apply the Groovy plugin to add support for Groovy
+    id 'groovy'
+
+    // 应用 Maven Publish Plugin 发布插件
+    id 'maven-publish'
+}
+
+repositories {
+    // Use Maven Central for resolving dependencies.
+    mavenCentral()
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', includes: ['*.jar'])
+
+    implementation gradleApi()
+    implementation localGroovy()
+
+    implementation "com.android.tools.build:gradle:$gradle_tool_version"
+
+    //ASM依赖
+    implementation 'org.ow2.asm:asm:9.1'
+    implementation 'org.ow2.asm:asm-commons:9.1'
+
+    // import org.apache.commons.io.FileUtils
+    implementation group: 'commons-io', name: 'commons-io', version: '2.6'
+}
+
+// https://docs.gradle.org/current/userguide/custom_plugins.html#sec:custom_plugins_standalone_project
+gradlePlugin {
+    // Define the plugin
+    plugins {
+        // PluginDeclaration
+        'touch-event' {
+            // 通过 apply/plugins 引用插件时使用的是这个id
+            id = groupIdStr
+            implementationClass = 'touch.event.gradle.plugin.TouchEventPlugin'
+            displayName = 'abc'
+            description = 'def'
+        }
+    }
+}
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+def MAVEN_USERNAME = properties.getProperty('MAVEN_USERNAME')
+def MAVEN_PASSWORD = properties.getProperty('MAVEN_PASSWORD')
+
+afterEvaluate {
+    publishing {
+    publications {
+        // toLocalRepo 名字自定义
+        toLocalRepo(MavenPublication) { // MavenPublication
+            groupId = "$groupIdStr"
+            artifactId = "$artifactIdStr"
+            version = "$versionStr"
+            // 组件类型，我们的插件其实就是Java组件
+            from components.java
+        }
+
+        maven(MavenPublication) { // MavenPublication
+            groupId = "$groupIdStr"
+            artifactId = "$artifactIdStr"
+            version = "$versionStr"
+            // 组件类型，我们的插件其实就是Java组件
+            from components.java
+        }
+    }
+    repositories {
+        maven {
+            // 发布到本地仓库
+            url uri("${rootProject.projectDir}/${LOCAL_REPO_PATH}")
+        }
+    }
+
+//        publications {
+//            // toLocalRepo 名字自定义
+//            maven(MavenPublication) { // MavenPublication
+//                println("publications versionStr:" + "$versionStr")
+//                groupId = "$groupIdStr"
+//                artifactId = "$artifactIdStr"
+//                version = "$versionStr"
+//                // 组件类型，我们的插件其实就是Java组件
+//                from components.java
+//            }
+//        }
+//        repositories {
+//            maven {
+//                // 重新赋值 version
+//                version = "$versionStr"
+//                println("version:" + version + ", SNAPSHOT:" + version.endsWith('SNAPSHOT'))
+//                if (MAVEN_USERNAME != null && MAVEN_PASSWORD != null) {
+//                    def releasesRepoUrl = 'https://nexus.xxx.net/repository/maven-releases'
+//                    def snapshotsRepoUrl = 'https://nexus.xxx.net/repository/maven-snapshots'
+//                    url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+//                    credentials {
+//                        username MAVEN_USERNAME
+//                        password MAVEN_PASSWORD
+//                    }
+//                } else {
+//                    url = layout.buildDirectory.dir('repos')
+//                }
+//            }
+//        }
+    }
+}
