@@ -1,0 +1,90 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "touch.event.gradle.plugin",
+    "module": "touch-event-gradle-plugin",
+    "version": "7.0.0.1-SNAPSHOT",
+    "attributes": {
+      "org.gradle.status": "integration"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.3.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "touch-event-gradle-plugin-7.0.0.1-SNAPSHOT.jar",
+          "url": "touch-event-gradle-plugin-7.0.0.1-SNAPSHOT.jar",
+          "size": 32443,
+          "sha512": "e5e2d8bf0c3fd3bba594752dcc5fe213d00e0f781853c5695beb3baf2436cdf494acb67814623182528d5b349ea645bfd4f483f31da5fe313732ccd658bcc3d9",
+          "sha256": "352f3c951a69d0db07692d575af97d6a9d243dea06c288d88018820b8e94a8d0",
+          "sha1": "1ed330c1a68c5ae715e67630dbbdb26bd2826bea",
+          "md5": "4502033ed7d6a67ad7c25ab68a578997"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "com.android.tools.build",
+          "module": "gradle",
+          "version": {
+            "requires": "7.2.0"
+          }
+        },
+        {
+          "group": "org.ow2.asm",
+          "module": "asm",
+          "version": {
+            "requires": "9.1"
+          }
+        },
+        {
+          "group": "org.ow2.asm",
+          "module": "asm-commons",
+          "version": {
+            "requires": "9.1"
+          }
+        },
+        {
+          "group": "commons-io",
+          "module": "commons-io",
+          "version": {
+            "requires": "2.6"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "touch-event-gradle-plugin-7.0.0.1-SNAPSHOT.jar",
+          "url": "touch-event-gradle-plugin-7.0.0.1-SNAPSHOT.jar",
+          "size": 32443,
+          "sha512": "e5e2d8bf0c3fd3bba594752dcc5fe213d00e0f781853c5695beb3baf2436cdf494acb67814623182528d5b349ea645bfd4f483f31da5fe313732ccd658bcc3d9",
+          "sha256": "352f3c951a69d0db07692d575af97d6a9d243dea06c288d88018820b8e94a8d0",
+          "sha1": "1ed330c1a68c5ae715e67630dbbdb26bd2826bea",
+          "md5": "4502033ed7d6a67ad7c25ab68a578997"
+        }
+      ]
+    }
+  ]
+}

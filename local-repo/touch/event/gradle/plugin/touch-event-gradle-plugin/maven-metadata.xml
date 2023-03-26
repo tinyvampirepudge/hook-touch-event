@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>touch.event.gradle.plugin</groupId>
+  <artifactId>touch-event-gradle-plugin</artifactId>
+  <versioning>
+    <latest>7.0.0.1-SNAPSHOT</latest>
+    <versions>
+      <version>7.0.0.1-SNAPSHOT</version>
+    </versions>
+    <lastUpdated>20230312145712</lastUpdated>
+  </versioning>
+</metadata>

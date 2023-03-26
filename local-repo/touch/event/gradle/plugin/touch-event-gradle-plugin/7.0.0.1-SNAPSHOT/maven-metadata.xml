@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata modelVersion="1.1.0">
+  <groupId>touch.event.gradle.plugin</groupId>
+  <artifactId>touch-event-gradle-plugin</artifactId>
+  <version>7.0.0.1-SNAPSHOT</version>
+  <versioning>
+    <snapshot>
+      <timestamp>20230312.145708</timestamp>
+      <buildNumber>1</buildNumber>
+    </snapshot>
+    <lastUpdated>20230312145708</lastUpdated>
+    <snapshotVersions>
+      <snapshotVersion>
+        <extension>pom</extension>
+        <value>7.0.0.1-20230312.145708-1</value>
+        <updated>20230312145708</updated>
+      </snapshotVersion>
+      <snapshotVersion>
+        <extension>module</extension>
+        <value>7.0.0.1-20230312.145708-1</value>
+        <updated>20230312145708</updated>
+      </snapshotVersion>
+      <snapshotVersion>
+        <extension>jar</extension>
+        <value>7.0.0.1-20230312.145708-1</value>
+        <updated>20230312145708</updated>
+      </snapshotVersion>
+    </snapshotVersions>
+  </versioning>
+</metadata>
