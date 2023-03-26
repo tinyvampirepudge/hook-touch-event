@@ -2,21 +2,21 @@
 
 gradle插件项目。
 
-## 如何开发插件
+# 如何开发插件
 
-### 简单示例
+## 简单示例
 
-1、先移除项目对插件的依赖 将根目录的`gradle.properties`文件中`APPLY_GRADLE_PLUGIN`的值，改为非"false"即可，然后`sync`即可
+### 1、先移除项目对插件的依赖 将根目录的`gradle.properties`文件中`APPLY_GRADLE_PLUGIN`的值，改为非"false"即可，然后`sync`即可
 
 ```groovy
 APPLY_GRADLE_PLUGIN = false
 ```
 
-2、删除本地的local_repo目录
+### 2、删除本地的local_repo目录
 
 3、发布插件到本地仓库：
 
-通过gradle命令行，执行发布的task即可。也可在AS的Gradle视图中执行对应的Task(推荐)。
+### 通过gradle命令行，执行发布的task即可。也可在AS的Gradle视图中执行对应的Task(推荐)。
 
 v4:
 
@@ -35,34 +35,32 @@ v7:
 # 或
 ./gradlew clean touch-event-gradle-plugin-v7:publishToLocalRepoPublicationToMavenRepository
 ```
-```
 
-4、增加app模块对插件的依赖。
+### 4、增加app模块对插件的依赖。
 
 将`APPLY_GRADLE_PLUGIN`的值，改为非"true"即可，然后`sync`即可
 
-5、(可选)如果app依赖的jar、aar等也依赖了插件，则需要按照依赖顺序，重新编译jar包和aar包。具体实际请见下方。
+### 5、(可选)如果app依赖的jar、aar等也依赖了插件，则需要按照依赖顺序，重新编译jar包和aar包。具体实际请见下方。
 
-6、(可选)查看插件的日志。打开Gradle视图，双击执行`app/Tasks/build/assemble`任务(任何能触发构建的Task均可)，在`Run`输出中搜索`Plugin-`
-前缀，即可看到对应日志。
+### 6、(可选)查看插件的日志。打开Gradle视图，双击执行`app/Tasks/build/assemble`任务(任何能触发构建的Task均可)，在`Run`输出中搜索`Plugin-`前缀，即可看到对应日志。
 
 ```
 ①这里推荐通过双击gradle视图中的Task方式。通过`/gradlew tasks`的方式，可能会出现gradle环境下jdk版本不一致导致的问题。
 ②插件中的日志输出，依赖的是`System.out.print(log)`;
 ```
 
-7、运行app。
+### 7、运行app。
 
 ```
 保险起见，也可以先删除app，重新安装。
 adb uninstall com.hook.touch.event
 ```
 
-8、Logcat中查看日志输出：`TouchEventDispatcher`
+### 8、Logcat中查看日志输出：`TouchEventDispatcher`
 
-### 更新aar及其依赖的jar包
+## 更新aar及其依赖的jar包
 
-#### 如果app依赖jar包，更新jar包：jar-module
+### 如果app依赖jar包，更新jar包：jar-module
 
 由于`app`模块依赖的jar包来自于`jar-module`，如果`touch-event-gradle-plugin`插件有更新，则需要重新生成jar包。
 
